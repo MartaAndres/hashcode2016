@@ -11,10 +11,19 @@ class Greedy:
     def __init__(self, instance):
         self.instance = instance
     
+    def bestDron():
+        min_time = self.instance.timeout
+        
+        for dron in inst.drones:
+            for order in inst.orders
+                time = dron.cost(order)
+                if time < min_time:
+                    min_time = time
     
     def solve(inst):
         while more_turns:
-            
+            mincost = m
+            best_dron = 0
             for dron in inst.drones:
         
         return solucion
