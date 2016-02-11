@@ -34,7 +34,7 @@ class Instance:
             (x,y) = map(int, input().split())
             l = int(input())
             products = list(map(int,input().split()))
-            orders.append((x,y,products))
+            orders.append((x,y,products, i))
     
         return Instance(rows, columns, drones, deadline, maxload, weights, warehouses, orders)
     

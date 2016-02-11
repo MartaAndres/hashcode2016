@@ -10,7 +10,9 @@ drone_turn = 0
 # x0 = instance.warehouses[0][0]
 # y0 = instance.warehouses[0][1]
 # drone_locations = [(x0,y0) for i in range(instance.drones)]
-for j,order in enumerate(instance.orders): # ordenar por tamaño de pedido?
+# Marta, leeme. Esto ordena los orders. El índice se pierde, pero he añadido a cada order una tercera componente con el índice ok?
+#instance.orders.sort(key = lambda x: len(x[2]) * math.sqrt(x[0]*x[0] + x[1]*x[1] ) ) # Sort taking into account number of orders and distance.
+for j, order in enumerate(instance.orders): # ordenar por tamaño de pedido?
     # find closest warehouse with the item
     x2 = order[0]
     y2 = order[1]
@@ -47,9 +49,23 @@ for j,inst_list in enumerate(instructions):
     # Add extra instructions to next drone
     extras = instructions[j][cutoff:]
     if j+1 < instance.drones:
+        extras = [(j+1,i[1],i[2],i[3],i[4]) for i in extras]
         instructions[j+1] += extras
     instructions[j] = instructions[j][:cutoff]
-    
+
+for j,inst_list in enumerate(instructions):
+    time = 0
+    x,y = (instance.warehouses[0][0],instance.warehouses[0][1])
+    for i,inst in enumerate(inst_list):
+        if inst[1] == 'L':
+            w = instance.warehouses[inst[2]]
+            time += (math.ceil(math.sqrt((x-w[0])**2 + (y-w[1])**2)))+1
+            x,y = w[0],w[1]
+        elif inst[1] == 'D':
+            o = instance.orders[inst[2]]
+            time += (math.ceil(math.sqrt((x-o[0])**2 + (y-o[1])**2)))+1
+            x,y = o[0],o[1]
+
 # print solutions
 print(sum(len(i) for i in instructions))
 for d in instructions:

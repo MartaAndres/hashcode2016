@@ -39,7 +39,7 @@ class Instance:
         self.rows = rows
         self.columns = columns
         self.num_drones = num_drones
-        self.deadline = deadline
+        self.timeout = deadline
         self.maxload = maxload
         self.weights = weights
         self.warehouses = warehouses
@@ -48,67 +48,89 @@ class Instance:
         # Initialise drones
         self.drones = []
         for i in range(0,num_drones):
-            d = Dron(instance, warehouses[0])
-            self.drones.append(d)
+            self.drones.append(warehouses[0])
+        
+        # Init history
+        self.history = []
             
+    ## Movimientos
+    def load(idDron,Nwarehouse,prodcut,Nitems):
+        history.append (str(dron) + "L" + str(Nwarehouse) + str(prodcut) + str(Nitems))
+        
+    def deliver(idDron,Nwarehouse,prodcut,Nitems):
+        history.append (str(idDron) + "D" + str(Ndeliver) + str(prodcut) + str(Nitems))
 
-class Dron:
 
-    def __init__(self, instance, warehouse):
-        self.instance = instance
-        # Position of the dron
-        self.x = wharehouse[0]
-        self.y = wharehouse[1]
-        # Current dron time
-        self.time = 0
-
-        # Ocupation of a given dron
-        self.load = 0
-        # Items that the dron carries
-        self.items = []
+################### COMPUTE
+# Devuelve lo mejor que puede hacer un dron, la orden que tiene que hacer y el warehouse que use
+# (dron,order,warehouse)
+def bestDron(inst):
+    min_time = inst.timeout
+    best_dron = None
+    best_order = None
+    best_warehouse = None
     
-    def cost(order_num):
-        min_coste = math.inf
-        ware_optima = 0
-        inst = self.instance
-        (cx,cy,cprods) = inst.orders[order_num]
+    for dron in inst.drones:
+        for order in inst.orders:
+            time, warehouse = cost(dron,order)
+            if time < min_time:
+                min_time = time
+                best_dron = dron
+                best_order = order
+                best_warehouse = warehouse
     
-        # Para cada warehouse
-        for wn in range(len(warehouses)):
-            (wx,wy,wprods) = warehouses[wn]
+    return (best_dron, best_order, best_warehouse)
+     
+
+# Devuelve la mejor forma de que un dron haga order
+# (coste, warehouse)
+def cost(inst,dron,order):
+    min_coste = math.inf
+    ware_optima = 0
+    (cx,cy,cprods) = inst.orders[order_num]
+
+    # Para cada warehouse
+    for wn in range(len(warehouses)):
+        (wx,wy,wprods) = warehouses[wn]
+        
+        # Comprueba que aquí esté todo
+        for cosa in cprods:
+            if cosa not in wprods: 
+                continue
+        
+        # Calcula el coste
+        coste = dist((self.x,self.y), (wx,wy)) + dist((wx,wy), (cx,cy)) + 2 #+1 por el load y el delivery
+        if (coste < min_coste):
+            ware_optima = wn
+            min_coste = coste
+
+    return (coste, wn)
             
-            # Comprueba que aquí esté todo
-            for cosa in cprods:
-                if cosa not in wprods: 
-                    continue
-            
-            # Calcula el coste
-            coste = dist((self.x,self.y), (wx,wy)) + dist((wx,wy), (cx,cy)) + 2 #+1 por el load y el delivery
-            if (coste < min_coste):
-                ware_optima = wn
-                min_coste = coste
-    
-        return (coste, wn)
-    
-    
-    def dist(u,v):
-        (a,b) = u
-        (c,d) = v
-        return math.sqrt((a-c)**2 + (b-d)**2)
-    
-    
-    
-    def load (Nitems, product, warehouse):
-        items[product] = Nitems
+#################### EXECUTE
+# Executes the order over the instance
+# ()
+def executeOrder(inst, dron, order, warehouse):
+    (ox,oy,oprod) = inst.orders[order]
+    (wx,wy,wprod) = inst.warehouses[warehouse]
         
-        x = warehouse[0]
-        y = warehouse[1]
+    # Carga todos los productos
+    inst.move(ox,oy) # Mueve al warehouse
+    for idprod in range(len(weigths)):
+        numprods = oprod[idprod]
+        inst.load(adron, numprods, product, awarehouse)
         
-        
-        
-        
-    def unload(Nitems, product, cell):
-        items[product] = items[product] - Nitems
-        
-        x = cell[0]
-        y = cell[1]
+    # Entrega
+    for idprod in range(len(weigths)):
+        inst.deliver(iddron,idorder,product,numprods)
+
+
+
+#################### MAIN
+inst = readInstance()
+
+(best_dron, best_order, best_warehouse) = bestDron(inst)
+more_turns = best_drone != None
+while more_turns:
+    executeOrder(inst,best_dron, best_order, best_warehouse)
+    (best_dron, best_order, best_warehouse) = bestDron(inst)
+    more_turns = best_drone != None
