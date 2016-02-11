@@ -36,10 +36,11 @@ for j,inst_list in enumerate(instructions):
         if inst[1] == 'L':
             w = instance.warehouses[inst[2]]
             time += (math.ceil(math.sqrt((x-w[0])**2 + (y-w[1])**2)))+1
+            x,y = w[0],w[1]
         elif inst[1] == 'D':
             o = instance.orders[inst[2]]
             time += (math.ceil(math.sqrt((x-o[0])**2 + (y-o[1])**2)))+1
-            
+            x,y = o[0],o[1]
         if time > instance.deadline:
             cutoff = i
             break

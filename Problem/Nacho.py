@@ -32,9 +32,17 @@ class Solution:
         
         for o in range(len(instance.orders)):
             for d in range(len(instance.drones)):
-                for p in range(instance.orders[0].products):
-                       
+                # an index
+                s = Score(o,d)
                 
+                if s > score
+                    best = o
+                    score = s
+                    dron = d
+                    
+        
+                    
+                    
     
         
         

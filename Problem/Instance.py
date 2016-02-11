@@ -45,18 +45,14 @@ class Instance:
         history.append (str(idDron) + "L" + str(Nwarehouse) + str(prodcut) + str(Nitems))
         drones[idDron].load (Nitems, product, instance.warehouses[Nwarehouse])
 
-    def unload(idDron, Nitems, product, Ndeliver):
-        history.append (str(idDron) + "D" + str(Ndeliver) + str(prodcut) + str(Nitems))
+    def deliver(idDron, Nitems, product, Ndeliver): # Esto es un deliver
+        history.append (str(idDron) + "D" + str(Ndeliver) + str(prodcut) + str(Nitems)) # WTF NAME
         drones[idDron].unload(Nitems, product, instance.orders[Ndeliver])
-
-    def deliver(self, dron_id, customer_id, product_id, num_items):
-        history.append(str(dron_id) + 
-        drones[dron_id]
     
         
 
-    def execute_order(self, adron,aorder,aw_num):
-        
+    def execute_order(self, iddron,aorder,aw_num):
+        dron = drones[iddron]
         (ox,oy,oprod) = aorder
         (wx,wy,wprod) = warehouses[aw_num]
         
@@ -64,7 +60,7 @@ class Instance:
         for product in products:
             move_dron(aorder)
             load(adron, oprod[product], product, awarehouse)
-            deliver()
+            deliver(adron,)
         
         coste_de_la_ejecucion = dist((adron.x,adron.y),(ox,oy))+dist((ox,oy),(wx,wy))
         return coste_de_la_ejecucion
