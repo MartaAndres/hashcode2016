@@ -89,6 +89,7 @@ def bestDron(inst):
 def cost(inst,dron,order):
     min_coste = float('inf')
     ware_optima = 0
+    (x,y) = inst.drones[dron]
     (cx,cy,cprods) = inst.orders[order]
 
     # Para cada warehouse
@@ -101,7 +102,7 @@ def cost(inst,dron,order):
                 continue
         
         # Calcula el coste
-        coste = dist((dronx,self.y), (wx,wy)) + dist((wx,wy), (cx,cy)) + 2 #+1 por el load y el delivery
+        coste = dist((x,y), (wx,wy)) + dist((wx,wy), (cx,cy)) + 2 #+1 por el load y el delivery
         if (coste < min_coste):
             ware_optima = wn
             min_coste = coste

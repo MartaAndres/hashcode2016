@@ -1,3 +1,8 @@
+################################################################################
+# Authors: Marta is saving us. You can! Come on!
+# Date: 11 - February - 2016
+################################################################################
+
 import math
 
 import InstanceNaive
@@ -7,10 +12,10 @@ instance = InstanceNaive.Instance.readInstance()
 
 instructions = [[] for i in range(instance.drones)]
 drone_turn = 0
-# x0 = instance.warehouses[0][0]
-# y0 = instance.warehouses[0][1]
-# drone_locations = [(x0,y0) for i in range(instance.drones)]
-instance.orders.sort(key = lambda x: len(x[2]) * math.sqrt(x[0]*x[0] + x[1]*x[1] ) )# Sort taking into account number of orders and distance.
+x0 = instance.warehouses[0][0]
+y0 = instance.warehouses[0][1]
+drone_locations = [(x0,y0) for i in range(instance.drones)]
+instance.orders.sort(key = lambda x: len(x[2]))# Sort taking into account number of orders and distance.
 for order in instance.orders:
     order_no = order[3]
     # find closest warehouse with the item
@@ -23,8 +28,17 @@ for order in instance.orders:
         for i,w in enumerate(instance.warehouses):
             if ((instance.warehouses[closest][2][item] <= 0) or 
                 (w[2][item] > 0 and math.sqrt((x2-w[0])**2+(y2-w[1])**2) < dist)):
+                dist = math.sqrt((x2-w[0])**2+(y2-w[1])**2) < dist
                 closest = i
         instance.warehouses[closest][2][item] -= 1
+        
+
+        dist = math.sqrt((instance.warehouses[closest][0]-drone_locations[drone_turn][0])**2+(instance.warehouses[closest][1]-drone_locations[drone_turn][1])**2)
+        for i,d in enumerate(drone_locations):
+            if math.sqrt((instance.warehouses[closest][0]-d[0])**2+(instance.warehouses[closest][1]-d[1])**2) < dist:
+                dist = math.sqrt((instance.warehouses[closest][0]-d[0])**2+(instance.warehouses[closest][1]-d[1])**2)
+                drone_turn = i
+            
         instructions[drone_turn].append((drone_turn,'L',closest,item,1))
         instructions[drone_turn].append((drone_turn,'D',order_no,item,1))
         drone_turn = (drone_turn + 1)%instance.drones
