@@ -15,7 +15,7 @@ class Greedy:
         best_warehouse = None
         
         for dron in inst.drones:
-            for order in inst.orders
+            for order in inst.orders:
                 time, warehouse = dron.cost(order)
                 if time < min_time:
                     min_time = time
@@ -32,3 +32,11 @@ class Greedy:
             inst.executeOrder(best_dron, best_order, best_warehouse)
             (best_dron, best_order, best_warehouse) = Greedy.bestDron()
             more_turns = best_drone != None
+        
+        return instance.historial
+
+
+## MAIN
+
+inst = Instance.readInstance()
+solve(inst)

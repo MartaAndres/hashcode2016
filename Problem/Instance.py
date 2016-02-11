@@ -57,10 +57,11 @@ class Instance:
         (wx,wy,wprod) = warehouses[aw_num]
         
         # Carga todos los productos
-        for product in products:
+        for idprod in products:
+            numprods = oprod[idprod]
             move_dron(aorder)
-            load(adron, oprod[product], product, awarehouse)
-            deliver(adron,)
+            load(adron, numprods, product, awarehouse)
+            deliver(iddron,idorder,product,numprods)
         
         coste_de_la_ejecucion = dist((adron.x,adron.y),(ox,oy))+dist((ox,oy),(wx,wy))
         return coste_de_la_ejecucion

@@ -42,8 +42,12 @@ for j,inst_list in enumerate(instructions):
             time += (math.ceil(math.sqrt((x-o[0])**2 + (y-o[1])**2)))+1
             x,y = o[0],o[1]
         if time > instance.deadline:
-            cutoff = i
+            cutoff = i - (1 if inst[1] == 'D' else 0)
             break
+    # Add extra instructions to next drone
+    extras = instructions[j][cutoff:]
+    if j+1 < instance.drones:
+        instructions[j+1] += extras
     instructions[j] = instructions[j][:cutoff]
     
 # print solutions
