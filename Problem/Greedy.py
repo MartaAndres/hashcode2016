@@ -13,21 +13,30 @@ class Greedy:
     
     def bestDron():
         min_time = self.instance.timeout
+        best_dron = -1
+        best_order = -1
         
         for dron in inst.drones:
             for order in inst.orders
                 time = dron.cost(order)
                 if time < min_time:
                     min_time = time
-    
+                    best_dron = dron
+                    best_order = order
+        
+        return (best_dron, best_order)
+     
     def solve(inst):
+        more_turns = True
         while more_turns:
-            mincost = m
-            best_dron = 0
-            for dron in inst.drones:
+            mincost = math.inf
+            (best_dron,best_order) = bestDron()
+            inst.executeOrder(best_dron,best_order)
         
         return solucion
     
+
+
     def newSol(self):
 
         # Initialise problem
@@ -38,7 +47,7 @@ class Greedy:
         while more_turns:
             
             # Execute a order
-            best_dron = sol.bestDron()
+            best_dron = bestDron()
             best_dron.executeBestOrder()
             more_turns = sol.recomputeCosts()
 

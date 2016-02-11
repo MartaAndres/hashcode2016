@@ -19,7 +19,8 @@ for j,order in enumerate(instance.orders): # ordenar por tamaño de pedido?
         dist = math.sqrt((x2-instance.warehouses[0][0])**2+(y2-instance.warehouses[0][1])**2)
         #for i,w in sorted(enumerate(instance.warehouses),key=lambda i,w: math.sqrt((x2-w[0])**2+(y2-w[1])**2)):
         for i,w in enumerate(instance.warehouses):
-            if (w[2][item]) > 0 and math.sqrt((x2-w[0])**2+(y2-w[1])**2) < dist:
+            if ((instance.warehouses[closest][2][item] <= 0) or 
+                (w[2][item] > 0 and math.sqrt((x2-w[0])**2+(y2-w[1])**2) < dist)):
                 closest = i
         instance.warehouses[closest][2][item] -= 1
         instructions[drone_turn].append((drone_turn,'L',closest,item,1))

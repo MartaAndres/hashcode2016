@@ -38,6 +38,24 @@ class Instance:
     
         return Instance(rows, columns, drones, deadline, maxload, weights, warehouses, orders)
     
+    ###
+    # Importados de Solution.py (!!!!)
+    ###
+    def load (idDron, Nitems, product, Nwarehouse):
+        history.append (str(idDron) + "L" + str(Nwarehouse) + str(prodcut) + str(Nitems))
+        drones[idDron].load (Nitems, product, instance.warehouses[Nwarehouse])
+
+    def unload(idDron, Nitems, product, Ndeliver):
+        history.append (str(idDron) + "D" + str(Ndeliver) + str(prodcut) + str(Nitems))
+        drones[idDron].unload(Nitems, product, instance.orders[Ndeliver])
+
+    # Best dron is taken from the set of drons with the lowest turn executed.
+    # The dron taken is the one with better best_order.
+    def bestDron():
+        min_time = self.instance.timeout
+        for dron in drones:
+            if dron.time < min_time:
+                min_time = dron.time
 
     # Instance's constructor.
     def __init__(self, rows, columns, drones, deadline, maxload, weights, warehouses, orders):
@@ -50,3 +68,5 @@ class Instance:
         self.warehouses = warehouses
         self.orders = orders
         
+        #Importados de Solution.py
+        self.historial = []

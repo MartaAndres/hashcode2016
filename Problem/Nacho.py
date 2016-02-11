@@ -3,68 +3,31 @@
 # Date: 11 - February - 2016
 ################################################################################
 
-from Instance import *
-#from queue import queue
+
 import math
 
 class Dron:
 
-    def __init__(self, instance, warehouse):
+    def __init__(self, instance):
         self.instance = instance
         # Position of the dron
-        self.x = wharehouse[0]
-        self.y = wharehouse[1]
+        self.x = instance.wharehouse[0]
+        self.y = instance.wharehouse[1]
         # Current dron time
         self.time = 0
 
-        # Ocupation of a given dron
-        self.load = 0
+
         # Items that the dron carries
         self.items = []
     
-    def cost(order_num):
-        min_coste = math.inf
-        ware_optima = 0
-        inst = self.instance
-        (cx,cy,cprods) = inst.orders[order_num]
     
-        # Para cada warehouse
-        for (wx,wy,wprods) in warehouses:
-            # Comprueba que aquí esté todo
-            for cosa in cprods:
-                if cosa not in wprods: 
-                    continue
-            
-            # Calcula el coste
-            coste = dist((self.x,self.y), (wx,wy)) + dist((wx,wy), (cx,cy)) + 2 #+1 por el load y el delivery
-            if (coste < min_coste):
-                ware_optima = w
-                min_coste = coste
-    
-        return coste
-    
-    
-    def dist(u,v):
-        (a,b) = u
-        (c,d) = v
-        return math.sqrt((a-c)**2 + (b-d)**2)
-    
-    
-    
-    def load (Nitems, product, warehouse):
-        items[product] = Nitems
-        
-        x = warehouse[0]
-        y = warehouse[1]
+    def load(Nitems,product,Nwarehouse):
         
         
-        
-        
-    def unload(Nitems, product, cell):
-        items[product] = items[product] - Nitems
-        
-        x = cell[0]
-        y = cell[1]
+    
+    
+
+
 
 
 # Solutions' representation.
@@ -77,11 +40,31 @@ class Solution:
         self.instance = instance
         self.history=[]
         
-        for i in range(0,instance.drones):
-            d = Dron(instance.warehouses[0])
+        for i in range(0, instance.drones):
+            d = Dron(instance)
             self.drones.append(d)
             
+    
+    def CalculateSolution():
+        TurnsLeft = True
+        
+        while TurnsLeft:
+            # Escogemos el dron con mejor función de evaluación            
+            max = 0
+            maxIndex = 0
             
+            for i in range(0,len(drones)):
+                x = drones[i].Evaluate()
+                
+                if x>max:
+                    max = x
+                    maxIndex = i
+        
+        
+            drones[i].
+                
+        
+    
     def load (idDron, Nitems, product, Nwarehouse):
         history.append (str(idDron) + "L" + str(Nwarehouse) + str(prodcut) + str(Nitems))
         drones[idDron].load (Nitems, product, instance.warehouses[Nwarehouse])
@@ -95,10 +78,9 @@ class Solution:
     # Best dron is taken from the set of drons with the lowest turn executed.
     # The dron taken is the one with better best_order.
     def bestDron():
-        min_time = self.instance.timeout
-        for dron in drones:
-            if dron.time < min_time:
-                min_time = dron.time
+        
+        
+        
 
         
     

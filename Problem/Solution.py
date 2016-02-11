@@ -81,24 +81,7 @@ class Solution:
             d = Dron(instance.warehouses[0])
             self.drones.append(d)
             
-            
-    def load (idDron, Nitems, product, Nwarehouse):
-        history.append (str(idDron) + "L" + str(Nwarehouse) + str(prodcut) + str(Nitems))
-        drones[idDron].load (Nitems, product, instance.warehouses[Nwarehouse])
-        
-    def unload(idDron, Nitems, product, Ndeliver):
-        history.append (str(idDron) + "D" + str(Ndeliver) + str(prodcut) + str(Nitems))
-        drones[idDron].unload(Nitems, product, instance.orders[Ndeliver])
 
-    
-
-    # Best dron is taken from the set of drons with the lowest turn executed.
-    # The dron taken is the one with better best_order.
-    def bestDron():
-        min_time = self.instance.timeout
-        for dron in drones:
-            if dron.time < min_time:
-                min_time = dron.time
 
         
     
