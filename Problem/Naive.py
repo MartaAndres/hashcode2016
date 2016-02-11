@@ -10,9 +10,9 @@ drone_turn = 0
 # x0 = instance.warehouses[0][0]
 # y0 = instance.warehouses[0][1]
 # drone_locations = [(x0,y0) for i in range(instance.drones)]
-# Marta, leeme. Esto ordena los orders. El índice se pierde, pero he añadido a cada order una tercera componente con el índice ok?
-#instance.orders.sort(key = lambda x: len(x[2]) * math.sqrt(x[0]*x[0] + x[1]*x[1] ) ) # Sort taking into account number of orders and distance.
-for j, order in enumerate(instance.orders): # ordenar por tamaño de pedido?
+instance.orders.sort(key = lambda x: len(x[2]) * math.sqrt(x[0]*x[0] + x[1]*x[1] ) )# Sort taking into account number of orders and distance.
+for order in instance.orders:
+    order_no = order[3]
     # find closest warehouse with the item
     x2 = order[0]
     y2 = order[1]
@@ -26,7 +26,7 @@ for j, order in enumerate(instance.orders): # ordenar por tamaño de pedido?
                 closest = i
         instance.warehouses[closest][2][item] -= 1
         instructions[drone_turn].append((drone_turn,'L',closest,item,1))
-        instructions[drone_turn].append((drone_turn,'D',j,item,1))
+        instructions[drone_turn].append((drone_turn,'D',order_no,item,1))
         drone_turn = (drone_turn + 1)%instance.drones
         
 # cut off instructions that go past the deadline

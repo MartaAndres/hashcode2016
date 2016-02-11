@@ -1,3 +1,5 @@
+import math
+
 ################### INPUT ##########################
 # Lee la instancia
 def readInstance():
@@ -70,9 +72,9 @@ def bestDron(inst):
     best_order = None
     best_warehouse = None
     
-    for dron in inst.drones:
-        for order in inst.orders:
-            time, warehouse = cost(dron,order)
+    for dron in range(len(inst.drones)):
+        for order in range(len(inst.orders)):
+            time, warehouse = cost(inst,dron,order)
             if time < min_time:
                 min_time = time
                 best_dron = dron
@@ -85,26 +87,32 @@ def bestDron(inst):
 # Devuelve la mejor forma de que un dron haga order
 # (coste, warehouse)
 def cost(inst,dron,order):
-    min_coste = math.inf
+    min_coste = float('inf')
     ware_optima = 0
-    (cx,cy,cprods) = inst.orders[order_num]
+    (cx,cy,cprods) = inst.orders[order]
 
     # Para cada warehouse
-    for wn in range(len(warehouses)):
-        (wx,wy,wprods) = warehouses[wn]
+    for wn in range(len(inst.warehouses)):
+        (wx,wy,wprods) = inst.warehouses[wn]
         
-        # Comprueba que aquí esté todo
+        # Comprueba que aqui este todo
         for cosa in cprods:
             if cosa not in wprods: 
                 continue
         
         # Calcula el coste
-        coste = dist((self.x,self.y), (wx,wy)) + dist((wx,wy), (cx,cy)) + 2 #+1 por el load y el delivery
+        coste = dist((dronx,self.y), (wx,wy)) + dist((wx,wy), (cx,cy)) + 2 #+1 por el load y el delivery
         if (coste < min_coste):
             ware_optima = wn
             min_coste = coste
 
     return (coste, wn)
+           
+# Distance 
+def dist(u,v):
+    (a,b) = u
+    (c,d) = v
+    return math.sqrt((a-c)**2 + (b-d)**2)            
             
 #################### EXECUTE
 # Executes the order over the instance
