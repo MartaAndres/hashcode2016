@@ -4,32 +4,6 @@
 ################################################################################
 
 
-import math
-
-class Dron:
-
-    def __init__(self, instance):
-        self.instance = instance
-        # Position of the dron
-        self.x = instance.wharehouse[0]
-        self.y = instance.wharehouse[1]
-        # Current dron time
-        self.time = 0
-
-
-        # Items that the dron carries
-        self.items = []
-    
-    
-    def load(Nitems,product,Nwarehouse):
-        
-        
-    
-    
-
-
-
-
 # Solutions' representation.
 class Solution:
 
@@ -46,23 +20,23 @@ class Solution:
             
     
     def CalculateSolution():
-        TurnsLeft = True
         
-        while TurnsLeft:
-            # Escogemos el dron con mejor función de evaluación            
-            max = 0
-            maxIndex = 0
-            
-            for i in range(0,len(drones)):
-                x = drones[i].Evaluate()
+        maxOrder = 
+            for j in range(len(instance.drones)):
                 
-                if x>max:
-                    max = x
-                    maxIndex = i
         
+    
+    def bestOrder():
+        best=-1
+        score=0
         
-            drones[i].
+        for o in range(len(instance.orders)):
+            for d in range(len(instance.drones)):
+                for p in range(instance.orders[0].products):
+                       
                 
+    
+        
         
     
     def load (idDron, Nitems, product, Nwarehouse):
@@ -72,15 +46,3 @@ class Solution:
     def unload(idDron, Nitems, product, Ndeliver):
         history.append (str(idDron) + "D" + str(Ndeliver) + str(prodcut) + str(Nitems))
         drones[idDron].unload(Nitems, product, instance.orders[Ndeliver])
-
-    
-
-    # Best dron is taken from the set of drons with the lowest turn executed.
-    # The dron taken is the one with better best_order.
-    def bestDron():
-        
-        
-        
-
-        
-    

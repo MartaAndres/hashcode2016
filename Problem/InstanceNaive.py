@@ -25,7 +25,7 @@ class Instance:
         for i in range(w):
             (x,y) = map(int, input().split())
             products = list(map(int,input().split()))
-            warehouses.append([x,y,products])
+            warehouses.append((x,y,products))
     
         # Customer orders
         orders = []
@@ -38,54 +38,13 @@ class Instance:
     
         return Instance(rows, columns, drones, deadline, maxload, weights, warehouses, orders)
     
-    ###
-    # Importados de Solution.py (!!!!)
-    ###
-    def load (idDron, Nitems, product, Nwarehouse):
-        history.append (str(idDron) + "L" + str(Nwarehouse) + str(prodcut) + str(Nitems))
-        drones[idDron].load (Nitems, product, instance.warehouses[Nwarehouse])
-
-    def unload(idDron, Nitems, product, Ndeliver):
-        history.append (str(idDron) + "D" + str(Ndeliver) + str(prodcut) + str(Nitems))
-        drones[idDron].unload(Nitems, product, instance.orders[Ndeliver])
-
-    def deliver(self, dron_id, customer_id, product_id, num_items):
-        history.append(str(dron_id) + 
-        drones[dron_id]
-    
-        
-
-    def execute_order(self, adron,aorder,aw_num):
-        
-        (ox,oy,oprod) = aorder
-        (wx,wy,wprod) = warehouses[aw_num]
-        
-        # Carga todos los productos
-        for product in products:
-            move_dron(aorder)
-            load(adron, oprod[product], product, awarehouse)
-            deliver()
-        
-        coste_de_la_ejecucion = dist((adron.x,adron.y),(ox,oy))+dist((ox,oy),(wx,wy))
-        return coste_de_la_ejecucion
-
     # Instance's constructor.
     def __init__(self, rows, columns, num_drones, deadline, maxload, weights, warehouses, orders):
         self.rows = rows
         self.columns = columns
-        self.num_drones = num_drones
+        self.drones = num_drones
         self.deadline = deadline
         self.maxload = maxload
         self.weights = weights
         self.warehouses = warehouses
         self.orders = orders
-        
-        #Importados de Solution.py
-        self.historial = []
-
-        # Initialise drones
-        self.drones = []
-        for i in range(0,num_drones):
-            d = Dron(instance, warehouses[0])
-            self.drones.append(d)
-            

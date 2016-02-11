@@ -29,7 +29,9 @@ class Dron:
         (cx,cy,cprods) = inst.orders[order_num]
     
         # Para cada warehouse
-        for (wx,wy,wprods) in warehouses:
+        for wn in range(len(warehouses)):
+            (wx,wy,wprods) = warehouses[wn]
+            
             # Comprueba que aquí esté todo
             for cosa in cprods:
                 if cosa not in wprods: 
@@ -38,10 +40,10 @@ class Dron:
             # Calcula el coste
             coste = dist((self.x,self.y), (wx,wy)) + dist((wx,wy), (cx,cy)) + 2 #+1 por el load y el delivery
             if (coste < min_coste):
-                ware_optima = w
+                ware_optima = wn
                 min_coste = coste
     
-        return coste
+        return (coste, wn)
     
     
     def dist(u,v):

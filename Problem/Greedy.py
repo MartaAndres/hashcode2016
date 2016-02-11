@@ -8,47 +8,27 @@ from queue import PriorityQueue
 
 class Greedy:
     
-    def __init__(self, instance):
-        self.instance = instance
-    
     def bestDron():
         min_time = self.instance.timeout
-        best_dron = -1
-        best_order = -1
+        best_dron = None
+        best_order = None
+        best_warehouse = None
         
         for dron in inst.drones:
             for order in inst.orders
-                time = dron.cost(order)
+                time, warehouse = dron.cost(order)
                 if time < min_time:
                     min_time = time
                     best_dron = dron
                     best_order = order
+                    best_warehouse = warehouse
         
-        return (best_dron, best_order)
+        return (best_dron, best_order, best_warehouse)
      
     def solve(inst):
-        more_turns = True
+        (best_dron, best_order, best_warehouse) = Greedy.bestDron()
+        more_turns = best_drone != None
         while more_turns:
-            mincost = math.inf
-            (best_dron,best_order) = bestDron()
-            inst.executeOrder(best_dron,best_order)
-        
-        return solucion
-    
-
-
-    def newSol(self):
-
-        # Initialise problem
-        sol = Solution()
-        sol.computeCosts()
-        more_turns = True
-
-        while more_turns:
-            
-            # Execute a order
-            best_dron = bestDron()
-            best_dron.executeBestOrder()
-            more_turns = sol.recomputeCosts()
-
-        return sol
+            inst.executeOrder(best_dron, best_order, best_warehouse)
+            (best_dron, best_order, best_warehouse) = Greedy.bestDron()
+            more_turns = best_drone != None
