@@ -5,7 +5,7 @@ import Instance
 instance = Instance.Instance.readInstance()
 
 
-instructions = [[]]*instance.drones
+instructions = [[] for i in range(instance.drones)]
 drone_turn = 0
 # x0 = instance.warehouses[0][0]
 # y0 = instance.warehouses[0][1]

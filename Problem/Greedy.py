@@ -12,6 +12,13 @@ class Greedy:
         self.instance = instance
     
     
+    def solve(inst):
+        while more_turns:
+            
+            for dron in inst.drones:
+        
+        return solucion
+    
     def newSol(self):
 
         # Initialise problem
@@ -24,6 +31,6 @@ class Greedy:
             # Execute a order
             best_dron = sol.bestDron()
             best_dron.executeBestOrder()
-            more_turns = sol.recomputeCosts()        
+            more_turns = sol.recomputeCosts()
 
         return sol

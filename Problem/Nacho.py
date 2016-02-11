@@ -73,10 +73,10 @@ class Solution:
     # Solution's constructor.
     def __init__(self, instance):
         # id of a dron is its index in this vector
-        self.drones = []
+        self.drones=[]
         self.instance = instance
-        self.historial = []
-
+        self.history=[]
+        
         for i in range(0,instance.drones):
             d = Dron(instance.warehouses[0])
             self.drones.append(d)
